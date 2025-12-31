@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>نتيجة الطالب</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>نتيجة الطالب</h2>
+<div id="res"></div>
+
+<script src="data.js"></script>
+<script>
+let s = localStorage.getItem("seat");
+let student = students[s];
+
+if(student){
+  res.innerHTML = `
+  <p><strong>الاسم:</strong> ${student.name}</p>
+  <p><strong>المجموع:</strong> ${student.total}</p>
+  <p><strong>الدرجات:</strong> ${student.grades.join(", ")}</p>
+  `;
+}else{
+  res.innerText = "رقم الجلوس غير موجود";
+}
+</script>
+
+</body>
+</html>
