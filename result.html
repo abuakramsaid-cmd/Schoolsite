@@ -4,41 +4,109 @@
 <meta charset="UTF-8">
 <title>نتيجة الطالب</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    text-align: center;
+  }
+
+  .card {
+    background: #ffffff;
+    padding: 40px 50px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    max-width: 450px;
+    width: 100%;
+  }
+
+  h1 {
+    color: #6a1b9a;
+    margin-bottom: 20px;
+  }
+
+  p {
+    margin-bottom: 15px;
+    color: #555;
+    font-size: 18px;
+  }
+
+  .result {
+    font-size: 20px;
+    font-weight: bold;
+    color: #004d40;
+    margin-top: 20px;
+  }
+
+  .btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 25px;
+    background: #6a1b9a;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+  }
+
+  .btn:hover {
+    background: #4a148c;
+  }
+</style>
 </head>
 <body>
+
 <div class="container">
   <div class="card">
     <h1>نتيجة الطالب</h1>
-    <div id="result">جاري التحميل...</div>
-    <a href="check.html" class="btn" style="margin-top:15px;">رجوع</a>
+    <div id="content">
+      <p>جاري جلب النتيجة...</p>
+    </div>
+    <a href="seat.html" class="btn">رجوع لإدخال رقم الجلوس</a>
   </div>
 </div>
-<script>
-// بيانات تجريبية (سنستبدلها لاحقًا)
-const students = {
-  "1": { name:"بشائر صلاح عبدالله محمد", total:202 },
-  "2": { name:"بشائر عمار نبيل عبده", total:264 },
-  "3": { name:"محمد منير احمد عامر", total:302 },
-  "4": { name:"مكرم صلاح درهم حزام", total:179 },
-  "5": { name:"ماهر هيثم حمود عبدالباري", total:242 },
-  "6": { name:"محمد خالد شمسان محمد", total:147 }
-  // استمر بإضافة باقي الطلاب
-};
-const seat = localStorage.getItem("seat");
-const box = document.getElementById("result");
 
-// تحقق مما إذا كان رقم الجلوس موجودًا
-if (!seat) {
-  box.innerHTML = "❌ لم يتم العثور على رقم جلوس. الرجاء إدخال رقم الجلوس أولاً.";
-} else if (students[seat]) {
-  box.innerHTML = `
-    <p><strong>الاسم:</strong> ${students[seat].name}</p>
-    <p><strong>المجموع:</strong> ${students[seat].total}</p>
-  `;
-} else {
-  box.innerHTML = "❌ رقم الجلوس غير موجود في قاعدة البيانات";
-}
+<script>
+const students = {
+  "101": { name: "أحمد علي", total: 250, result: "ناجح" },
+  "102": { name: "ليلى محمد", total: 280, result: "ناجح" },
+  "103": { name: "سامر حسن", total: 190, result: "راسب" },
+  "104": { name: "نور عبد الله", total: 300, result: "ناجح" }
+};
+
+window.onload = function() {
+  const seat = localStorage.getItem("seat");
+  const contentDiv = document.getElementById("content");
+
+  if(!seat) {
+    contentDiv.innerHTML = "<p style='color:red;'>لم يتم إدخال رقم الجلوس!</p>";
+    return;
+  }
+
+  const student = students[seat];
+
+  if(student) {
+    contentDiv.innerHTML = `
+      <p>رقم الجلوس: <strong>${seat}</strong></p>
+      <p>اسم الطالب: <strong>${student.name}</strong></p>
+      <p>المجموع: <strong>${student.total}</strong></p>
+      <p class="result">النتيجة: ${student.result}</p>
+    `;
+  } else {
+    contentDiv.innerHTML = `<p style='color:red;'>عذراً، لم يتم العثور على نتيجة لهذا الرقم.</p>`;
+  }
+};
 </script>
 
 </body>
