@@ -1,17 +1,34 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>موقع المدرسة</title>
+<title>إدخال رقم الجلوس</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 </head>
-<body style="font-family:Tahoma;text-align:center;padding-top:50px;">
+<body>
 
-<h1>مدرسة الحيل</h1>
-<p>بوابة نتائج الطلاب</p>
+<div class="container">
+  <div class="card">
+    <h1>رقم الجلوس</h1>
+    <p>يرجى إدخال رقم الجلوس لعرض النتيجة</p>
 
-<a href="card.html">الدخول إلى النتائج</a>
+    <input type="number" id="seat" placeholder="رقم الجلوس" class="input">
+    <button class="btn" onclick="go()">عرض النتيجة</button>
+  </div>
+</div>
+
+<script>
+function go(){
+  var seat = document.getElementById("seat").value;
+  if(seat === ""){
+    alert("يرجى إدخال رقم الجلوس");
+    return;
+  }
+  localStorage.setItem("seat", seat);
+  window.location.href = "result.html";
+}
+</script>
 
 </body>
 </html>
