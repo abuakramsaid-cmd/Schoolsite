@@ -21,7 +21,7 @@
 
   .card {
     background: #ffffff;
-    padding: 40px 60px;
+    padding: 50px 60px;
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
   }
@@ -33,14 +33,13 @@
 
   .btn {
     display: inline-block;
-    padding: 15px 30px;
+    padding: 15px 40px;
     background: #0288d1;
     color: #fff;
-    text-decoration: none;
     font-size: 20px;
     border-radius: 10px;
+    text-decoration: none;
     transition: 0.3s;
-    cursor: pointer;
   }
 
   .btn:hover {
@@ -52,43 +51,10 @@
 
 <div class="container">
   <div class="card">
-    <h1>مرحبا بكم في نتائج المدرسة</h1>
-
-    <!-- زر الدخول -->
-    <div class="btn" id="enterBtn">الدخول إلى النتائج</div>
+    <h1>مرحبا بكم في مدرسة الفتح بطنة قدس</h1>
+    <a href="seat.html" class="btn">الدخول إلى النتائج</a>
   </div>
 </div>
-
-<script>
-document.getElementById('enterBtn').addEventListener('click', function() {
-    // قائمة الأماكن الممكنة لملف check.html
-    const paths = [
-        'check.html',          // نفس المجلد
-        './check.html',        // نفس المجلد (صيغة بديلة)
-        'pages/check.html',    // داخل مجلد pages
-        'results/check.html'   // داخل مجلد results
-    ];
-
-    let opened = false;
-
-    for (let i = 0; i < paths.length; i++) {
-        fetch(paths[i], { method: 'HEAD' })
-        .then(response => {
-            if (response.ok && !opened) {
-                opened = true;
-                window.location.href = paths[i]; // افتح الملف إذا موجود
-            }
-        })
-        .catch(err => {
-            // إذا الملف غير موجود لا يحدث شيء، يجرب المسار التالي
-        });
-    }
-
-    if (!opened) {
-        alert('عذراً، لم يتم العثور على صفحة النتائج!');
-    }
-});
-</script>
 
 </body>
 </html>
