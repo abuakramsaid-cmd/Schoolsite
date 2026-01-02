@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>إدخال رقم الجلوس</title>
+<title>مدرسة الحيل</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -10,25 +10,17 @@
 
 <div class="container">
   <div class="card">
-    <h1>رقم الجلوس</h1>
-    <p>يرجى إدخال رقم الجلوس لعرض النتيجة</p>
+    <!-- الشعار -->
+    <img src="logo.png" alt="شعار المدرسة" class="logo">
 
-    <input type="number" id="seat" placeholder="رقم الجلوس" class="input">
-    <button class="btn" onclick="go()">عرض النتيجة</button>
+    <!-- اسم المدرسة -->
+    <h1>مدرسة الحيل</h1>
+    <p>بوابة نتائج الطلاب</p>
+
+    <!-- زر الدخول -->
+    <a href="check.html" class="btn">الدخول إلى النتائج</a>
   </div>
 </div>
-
-<script>
-function go(){
-  var seat = document.getElementById("seat").value;
-  if(seat === ""){
-    alert("يرجى إدخال رقم الجلوس");
-    return;
-  }
-  localStorage.setItem("seat", seat);
-  window.location.href = "result.html";
-}
-</script>
 
 </body>
 </html>
