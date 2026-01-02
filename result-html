@@ -21,7 +21,6 @@ const students = {
   "102": { name: "علي صالح", total: 300 },
   "103": { name: "منى عبدالله", total: 270 }
 };
-
 const seat = localStorage.getItem("seat");
 const box = document.getElementById("result");
 
