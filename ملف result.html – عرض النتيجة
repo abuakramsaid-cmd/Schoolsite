@@ -3,26 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <title>نتيجة الطالب</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h2>نتيجة الطالب</h2>
-<div id="res"></div>
+<div class="container">
+  <div class="card">
+    <h1>نتيجة الطالب</h1>
+    <div id="result">جاري التحميل...</div>
+    <a href="check.html" class="btn" style="margin-top:15px;">رجوع</a>
+  </div>
+</div>
 
-<script src="data.js"></script>
 <script>
-let s = localStorage.getItem("seat");
-let student = students[s];
+// بيانات تجريبية (سنستبدلها لاحقًا)
+const students = {
+  "101": { name:"أحمد محمد", total:280 },
+  "102": { name:"علي صالح", total:300 },
+  "103": { name:"منى عبدالله", total:270 }
+};
 
-if(student){
-  res.innerHTML = `
-  <p><strong>الاسم:</strong> ${student.name}</p>
-  <p><strong>المجموع:</strong> ${student.total}</p>
-  <p><strong>الدرجات:</strong> ${student.grades.join(", ")}</p>
+const seat = localStorage.getItem("seat");
+const box = document.getElementById("result");
+
+if(students[seat]){
+  box.innerHTML = `
+    <p><strong>الاسم:</strong> ${students[seat].name}</p>
+    <p><strong>المجموع:</strong> ${students[seat].total}</p>
   `;
 }else{
-  res.innerText = "رقم الجلوس غير موجود";
+  box.innerHTML = "❌ رقم الجلوس غير موجود";
 }
 </script>
 
