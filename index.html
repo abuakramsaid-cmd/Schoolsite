@@ -1,48 +1,97 @@
  <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>مدرسة الفتح – بطنة قدس</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-body{ font-family:"Tahoma", Arial; background:#f9f2f2; margin:0; }
-.container{ display:flex; justify-content:center; align-items:center; height:100vh; }
-.card{ background:white; padding:30px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:center; width:320px; }
-.card h1{ color:#7a1f2b; margin-bottom:10px; }
-.card h2{ color:#7a1f2b; margin-bottom:20px; }
-.btn{ display:inline-block; padding:12px 25px; background:#7a1f2b; color:white; border:none; border-radius:6px; cursor:pointer; text-decoration:none; font-size:16px; }
-.btn:hover{ background:#5f1822; }
-.notice{ color:#5f1822; margin-bottom:15px; }
-</style>
+    <meta charset="UTF-8">
+    <title>مدرسة الفتح – بطنة قدس</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: "Tahoma", Arial;
+            background: #f9f2f2;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+        .card h1 {
+            color: #7a1f2b;
+            margin-bottom: 10px;
+        }
+        .card h2 {
+            color: #7a1f2b;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #7a1f2b;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 10px 5px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #5f1822;
+        }
+        .notice {
+            color: #5f1822;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        .buttons-container {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
-  <div class="card">
-    <h1>مرحبًا بكم</h1>
-    <h2>في مدرسة الفتح</h2>
-    <p class="notice">للوصول إلى النتائج، يجب تفعيل الكرت أولاً.</p>
-    <button class="btn" onclick="goCard()"> المرحلة الثانوية </button>
-  </div>
+    <div class="card">
+        <h1>مرحبًا بكم</h1>
+        <h2>في مدرسة الفتح</h2>
+        <p class="notice">للوصول إلى النتائج، يجب تفعيل الكرت أولاً.</p>
+        
+        <div class="buttons-container">
+            <button class="btn" onclick="goCard('card-secondary.html')">
+                المرحلة الثانوية
+            </button>
+            <button class="btn" onclick="goCard('card-preparatory.html')">
+                المرحلة الإعدادية
+            </button>
+        </div>
+    </div>
 </div>
-<button class="btn" onclick="goCard()"> المرحلة الإعدادية  </button>
-  </div>
-</div>
+
 <script>
-function goCard(){
-  // تجربة فتح card.html مباشرة
-  fetch('card.html')
-  .then(response => {
-    if(response.ok){
-      // الملف موجود → انتقل إليه
-      window.location.href = "card.html";
-    } else {
-      alert("⚠️ صفحة الكرت غير موجود! تأكد من رفع card.html بنفس المجلد.");
-    }
-  })
-  .catch(error => {
-    alert("⚠️ لم يتم العثور على صفحة الكرت! تأكد من رفع card.html.");
-  });
+function goCard(pageUrl) {
+    fetch(pageUrl)
+        .then(response => {
+            if (response.ok) {
+                window.location.href = pageUrl;
+            } else {
+                alert("⚠️ صفحة الكرت غير موجودة! تأكد من رفع الملف: " + pageUrl);
+            }
+        })
+        .catch(error => {
+            alert("⚠️ حدث خطأ في تحميل الصفحة! تأكد من اتصال الإنترنت وصحة الملف: " + pageUrl);
+        });
 }
 </script>
 
