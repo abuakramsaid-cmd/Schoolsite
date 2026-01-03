@@ -28,13 +28,14 @@ body{ font-family:"Tahoma", Arial; background:#f9f2f2; margin:0; }
 
 <script>
 function goCard(){
-  // التأكد من وجود card.html
+  // تجربة فتح card.html مباشرة
   fetch('card.html')
   .then(response => {
     if(response.ok){
+      // الملف موجود → انتقل إليه
       window.location.href = "card.html";
     } else {
-      alert("⚠️ صفحة الكرت غير موجود! تأكد من رفع card.html في نفس المجلد.");
+      alert("⚠️ صفحة الكرت غير موجود! تأكد من رفع card.html بنفس المجلد.");
     }
   })
   .catch(error => {
