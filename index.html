@@ -2,16 +2,69 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>الصفحة الرئيسية</title>
+<title>مدرسة الفتح – بطنة قدس</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h2>الصفحة الرئيسية</h2>
+<div class="container">
+  <div class="card">
 
-<ul>
-  <li><a href="check.html">الذهاب إلى صفحة إدخال رقم الجلوس</a></li>
-  <li><a href="result.html">فتح صفحة النتائج مباشرة</a></li>
-</ul>
+    <!-- اسم المدرسة -->
+    <h1 style="color:#1e3a8a;">مرحبًا بكم</h1>
+    <h2 style="margin-top:5px;">في مدرسة الفتح</h2>
+    <p style="margin-bottom:20px;color:#555;">بطنة قدس</p>
+
+    <!-- إدخال الكرت -->
+    <input type="text" id="card" placeholder="أدخل كود الكرت">
+
+    <button class="btn" onclick="activate()">دخول</button>
+
+    <p id="msg" style="color:red;margin-top:10px;"></p>
+
+  </div>
+</div>
+
+<script>
+/* ===== كروت التفعيل ===== */
+let cards = JSON.parse(localStorage.getItem("cards")) || {
+  "ABC123": false,
+  "DEF456": false,
+  "GHI789": false,
+  "JKL321": false,
+  "MNO654": false
+};
+
+/* ===== تفعيل الكرت ===== */
+function activate(){
+  const card = document.getElementById("card").value.trim();
+  const msg = document.getElementById("msg");
+
+  if(card === ""){
+    msg.textContent = "يرجى إدخال كود الكرت";
+    return;
+  }
+
+  if(!(card in cards)){
+    msg.textContent = "❌ كود الكرت غير صحيح";
+    return;
+  }
+
+  if(cards[card] === true){
+    msg.textContent = "❌ هذا الكرت مستخدم مسبقًا";
+    return;
+  }
+
+  // تفعيل الكرت
+  cards[card] = true;
+  localStorage.setItem("cards", JSON.stringify(cards));
+  localStorage.setItem("activated", "yes");
+
+  // الانتقال لإدخال رقم الجلوس
+  window.location.href = "check.html";
+}
+</script>
 
 </body>
 </html>
