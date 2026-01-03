@@ -225,3 +225,78 @@ const class1Students = [
     {seat:737,name:"عبدالله ابوبكر عبدالباقي عبدالوهاب",class:"1",q:29,i:19,a:25,e:24,m:27,p:21,c:26,b:42,t:213},
     {seat:738,name:"عبدالله امين عبدالله احمد",class:"1",q:32,i:20,a:27,e:23,m:22,p:22,c:28,b:39,t:213},
     {seat:739,name:"عبدالله عبدالعزيز عباس عبده",class:"1",q:48,i:36,a:47,e:30,m:37,p:32,c:39,b:46,t:315},
+
+/ دالة لعرض "غير مكتمل" إذا كانت القيمة null
+function v(x){ return x===null ? "غير مكتمل" : x; }
+
+function search(){
+    const seat = document.getElementById("seat").value;
+    const classSelect = document.getElementById("classSelect").value;
+    const r = document.getElementById("result");
+    
+    if(!seat){
+        r.innerHTML = "<p class='error'>الرجاء إدخال رقم الجلوس</p>";
+        return;
+    }
+    
+    let student = null;
+    let classType = "";
+    
+    // البحث في الفصل الأول
+    if(classSelect === "all" || classSelect === "1"){
+        student = class1Students.find(x => x.seat == seat);
+        if(student) classType = "1";
+    }
+    
+    // البحث في الفصل الثاني إذا لم يتم العثور في الأول
+    if(!student && (classSelect === "all" || classSelect === "2")){
+        student = class2Students[seat];
+        if(student) classType = "2";
+    }
+    
+    if(!student){
+        r.innerHTML = "<p class='error'>رقم الجلوس غير موجود</p>";
+        return;
+    }
+    
+    let resultHTML = "";
+    
+    if(classType === "1"){
+        // عرض نتيجة الفصل الأول
+        resultHTML = `
+        <div class="ca
+            <div class="card-header">
+                <h3>${student.name} <span class="class-badge">الفصل الأول</span></h3>
+                <span>رقم الجلوس: ${student.seat}</span>
+            </div>
+            <div class="card-body">
+                <div class="grid">
+                    <div class="item"><strong>القرآن</strong>${v(student.q)}</div>
+                    <div class="item"><strong>الإسلامية</strong>${v(student.i)}</div>
+                    <div class="item"><strong>العربي</strong>${v(student.a)}</div>
+                    <div class="item"><strong>الإنجليزي</strong>${v(student.e)}</div>
+                    <div class="item"><strong>الرياضيات</strong>${v(student.m)}</div>
+                    <div class="item"><strong>الفيزياء</strong>${v(student.p)}</div>
+                    <div class="item"><strong>الكيمياء</strong>${v(student.c)}</div>
+                    <div class="item"><strong>الأحياء</strong>${v(student.b)}</div>
+                </div>
+                <div class="total">
+                    المجموع الكلي : ${v(student.t)}
+                </div>
+            </div>
+        </div>`;
+    } else if(classType === "2"){
+        // عرض نتيجة الفصل الثاني
+        resultHTML = `
+        <div class="card">
+            <div class="card-header">
+                <h3>${student.name} <span class="class-badge second-class">الفصل الثاني</span></h3>
+
+
+
+
+
+
+
+    
+    
