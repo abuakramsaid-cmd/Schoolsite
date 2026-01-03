@@ -2,94 +2,65 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>إدخال رقم الجلوس</title>
+<title>إدخال البيانات</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-
-  .container {
-    text-align: center;
-  }
-
-  .card {
-    background: #ffffff;
-    padding: 40px 50px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    max-width: 400px;
-    width: 100%;
-  }
-
-  h1 {
-    color: #00796b;
-    margin-bottom: 15px;
-  }
-
-  p {
-    margin-bottom: 25px;
-    color: #555;
-  }
-
-  .input {
-    width: 80%;
-    padding: 12px 10px;
-    font-size: 18px;
-    margin-bottom: 20px;
-    border: 2px solid #0288d1;
-    border-radius: 8px;
-    outline: none;
-    transition: 0.3s;
-  }
-
-  .input:focus {
-    border-color: #01579b;
-  }
-
-  .btn {
-    display: inline-block;
-    padding: 12px 30px;
-    background: #0288d1;
-    color: #fff;
-    font-size: 18px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
-  .btn:hover {
-    background: #01579b;
-  }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
   <div class="card">
-    <h1>رقم الجلوس</h1>
-    <p>يرجى إدخال رقم الجلوس لعرض النتيجة</p>
+    <h1>بوابة النتائج</h1>
 
-    <input type="number" id="seat" placeholder="رقم الجلوس" class="input">
+    <input type="number" id="seat" placeholder="رقم الجلوس">
+
+    <input type="text" id="card" placeholder="كود الكرت">
+
     <button class="btn" onclick="go()">عرض النتيجة</button>
+
+    <p id="msg" style="color:red;margin-top:10px;"></p>
   </div>
 </div>
 
 <script>
-function go() {
-  const seat = document.getElementById("seat").value.trim();
-  if(seat === "") {
-    alert("يرجى إدخال رقم الجلوس");
+/* ====== كروت التفعيل ====== */
+let cards = JSON.parse(localStorage.getItem("cards")) || {
+  "ABC123": false,
+  "DEF456": false,
+  "GHI789": false,
+  "JKL321": false,
+  "MNO654": false
+};
+// false = غير مستخدم | true = مستخدم
+
+function go(){
+  const seat = document.getElementById("seat").value;
+  const card = document.getElementById("card").value.trim();
+  const msg = document.getElementById("msg");
+
+  if(seat === "" || card === ""){
+    msg.textContent = "يرجى إدخال رقم الجلوس وكود الكرت";
     return;
   }
+
+  if(!(card in cards)){
+    msg.textContent = "❌ كود الكرت غير صحيح";
+    return;
+  }
+
+  if(cards[card] === true){
+    msg.textContent = "❌ هذا الكرت مستخدم مسبقًا";
+    return;
+  }
+
+  // تفعيل الكرت
+  cards[card] = true;
+  localStorage.setItem("cards", JSON.stringify(cards));
+
+  // حفظ رقم الجلوس
   localStorage.setItem("seat", seat);
+
+  // الانتقال للنتيجة
   window.location.href = "result.html";
 }
 </script>
